@@ -12,12 +12,12 @@ const client = new ApolloClient({
 
 // writing the first query
 const POSTS_QUERY = gql`
-{
-  posts {
-   id
-   title
-   body
-  }
+ query allPosts{
+   posts {
+    id
+    title
+    body
+   }
  }
  `
 
@@ -29,7 +29,7 @@ const POSTS_QUERY = gql`
 
 
 
-// Use a Query Component, and render prop to return soem data
+// Use a Query Component, and render prop to return some data
 
 class App extends Component {
   render() {
