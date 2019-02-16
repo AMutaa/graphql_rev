@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import gql from 'graphql-tag'
 import logo from './logo.svg';
 import './App.css';
 
+// setting up client
 const client = new ApolloClient({
   uri: 'https://api-useast.graphcms.com/v1/cjs43zffl1ixr01gfikmzpp5v/master'
 })
+
+// writing the first query
+const testQuery = gql`
+{
+  posts {
+   id
+   title
+   body
+  }
+ }
+`
+// testing if our client is connected
+client.query({
+  query: testQuery
+})
+  .then(res => console.log(res))
+
 
 
 class App extends Component {
