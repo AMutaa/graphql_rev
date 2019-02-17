@@ -4,8 +4,6 @@ import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Post from './Posts/Post';
 import Posts from './Posts/Posts';
-
-
 import './App.css';
 
 // setting up client

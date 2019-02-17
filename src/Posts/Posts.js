@@ -15,9 +15,11 @@ export default class Posts extends Component {
           if (loading) return 'Loading...';
           const { posts } = data;
           return posts.map(post => (
-            <Link key={post.id} to={`/posts/${post.id}`}>
-              <h1>{post.title}</h1>
-            </Link>
+            <li key={post.id} >
+              <Link to={`/post/${post.id}`}>
+                <h1>{post.title}</h1>
+              </Link>
+            </li>
           ));
         }}
 
