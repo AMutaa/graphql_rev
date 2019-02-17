@@ -1,6 +1,19 @@
-.App {
+html{
+  box-sizing: border-box;
   text-align: center;
 }
 li{
-  list-style-type: none
+  list-style-type: none;
 }
+.header{
+  width: 300px;
+  color: brown;
+  text-decoration: none;
+  text-decoration-line: none;
+  border: 5px solid brown;
+  padding: 20px 20px;
+  margin: 100px auto;
+  border-radius: 4px;
+}
+
+
