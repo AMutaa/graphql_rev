@@ -3,41 +3,19 @@ import PostForm from './PostForm'
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
+
+// create a mutation and pass in a prop of mutation = a query
+// mutation createPost which a renderProp returning a form
+
 export default class NewPost extends Component {
-  state = {
-    title: '',
-    body: ''
-  }
-  handleInput = (e) => {
-    const formData = {}
-    formData[e.target.name] = e.target.value
-    this.setState({ ...formData })
-  }
   render() {
-    const { title, body } = this.state
     return (
       <div>
         <h1>New Post</h1>
-        {/* <PostForm /> */}
-        <Mutation mutation={NEW_POST} variables={{ title, body }}>
+        <Mutation mutation={NEW_POST}>
           {createPost => (
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              createPost().then(
-                () => {
-                  this.setState({
-                    title: '',
-                    body: ''
-                  })
-                }
-              ).catch(e => console.log(e))
-            }}>
-              <input name="title" type="text" onChange={this.handleInput} value={title} placeholder="title" />
-              <textarea name="body" type="text" onChange={this.handleInput} value={body} placeholder="body" id="" cols="30" rows="10" />
-              <button>Submit</button>
-            </form>
+            <PostForm onSubmit={createPost} />
           )}
-
         </Mutation>
       </div>
     )
