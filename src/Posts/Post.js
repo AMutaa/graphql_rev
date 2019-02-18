@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import UpdatePost from './UpdatePost'
+import UpdatePost from './UpdatePost';
+import EditMode from './EditMode';
+
 
 // Access to isEditMode
 
@@ -15,6 +17,7 @@ export default class Post extends Component {
           const { post, isEditMode } = data;
           return (
             <div>
+              <EditMode isEditMode={isEditMode} />
               {isEditMode ? (
                 <section>
                   <h1>Edit Post</h1>
