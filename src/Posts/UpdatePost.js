@@ -3,7 +3,7 @@ import PostForm from './PostForm';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
-
+// update Post mutation
 
 export default class UpdatePost extends Component {
   render() {

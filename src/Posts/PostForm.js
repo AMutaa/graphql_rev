@@ -49,7 +49,7 @@ export default class PostForm extends Component {
       }}>
         <input name="title" type="text" onChange={this.handleInput} value={title} placeholder="title" />
         <textarea name="body" type="text" onChange={this.handleInput} value={body} placeholder="body" id="" cols="30" rows="10" />
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     )
   }
