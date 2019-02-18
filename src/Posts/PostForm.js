@@ -9,7 +9,12 @@ import PropTypes from 'prop-types';
 export default class PostForm extends Component {
 
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    post: PropTypes.object
+  }
+
+  static propTypes = {
+    post: {}
   }
 
   state = {
