@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 
 
 // create our post form, we submit a function
 // function sets state to empty
 
 export default class PostForm extends Component {
+
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired
+  }
+
   state = {
-    title: '',
-    body: ''
+    id: this.props.post.id || '',
+    title: this.props.post.title || '',
+    body: this.props.post.body || ''
   }
 
   handleInput = (e) => {
@@ -18,16 +26,18 @@ export default class PostForm extends Component {
 
   render() {
     const { onSubmit } = this.props
-    const { title, body } = this.state
+    const { title, body, id } = this.state
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
-        onSubmit({ variables: { title, body } })
+        onSubmit({ variables: { title, body, id } })
           .then(
             () => {
               this.setState({
+                id,
                 title: '',
-                body: ''
+                body: '',
+
               })
             }
           ).catch(e => console.log(e))
