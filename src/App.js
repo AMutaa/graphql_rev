@@ -5,12 +5,21 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Post from './Posts/Post';
 import Posts from './Posts/Posts';
 import NewPost from './Posts/NewPost';
-
 import './App.css';
 
-// setting up client
+// Local State with Apollo Link State
+
+const defaultState = {
+  isEditMode: false
+}
+
+// setting up client, connecting our site to GraphQL API
 const client = new ApolloClient({
-  uri: 'https://api-useast.graphcms.com/v1/cjs43zffl1ixr01gfikmzpp5v/master'
+  uri: 'https://api-useast.graphcms.com/v1/cjs43zffl1ixr01gfikmzpp5v/master',
+  clientState: {
+    defaults: defaultState,
+    resolvers: {}
+  }
 })
 
 
