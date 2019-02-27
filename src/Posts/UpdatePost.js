@@ -13,9 +13,7 @@ export default class UpdatePost extends Component {
         {(updatePost, result) => {
           const onSuccess = () => result.client.writeData({ isEditMode: false })
           return <PostForm post={post} onSuccess={onSuccess} onSubmit={updatePost} />
-        }
-
-        }
+        }}
       </Mutation>
     )
   }

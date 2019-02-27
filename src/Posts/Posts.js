@@ -3,8 +3,6 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 
-
-
 // Use a Query Component, and render prop to return some data
 
 export default class Posts extends Component {
