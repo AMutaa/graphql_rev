@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import UpdatePost from './UpdatePost';
 import EditMode from './EditMode';
@@ -25,6 +25,41 @@ export default class Post extends Component {
                 </section>) : (
                   <section>
                     <h1>{post.title}</h1>
+                    <Mutation mutation={UPDATE_POST}
+                      variables={{
+                        id: post.id,
+                        check: !post.check
+                      }}
+                      // response we are expecting from the server
+                      optimisticResponse={{
+                        __typename: "Mutation",
+                        updatePost: {
+                          __typename: 'Post',
+                          check: !post.check
+                        }
+                      }}
+                      // updating the data in the cache
+                      update={(cache, { data: { updatePost } }) => {
+                        const data = cache.readQuery({
+                          query: POST_QUERY,
+                          variables: {
+                            id: post.id
+                          }
+                        })
+                        data.post.check = updatePost.check;
+                        cache.writeQuery({
+                          query: POST_QUERY,
+                          data: {
+                            ...data,
+                            post: post.data.post
+                          }
+                        })
+                      }}
+                    >
+                      {updatePost => (
+                        <input style={{ height: '100px' }} type="checkbox" checked={post.check} onChange={updatePost} />)}
+                    </Mutation>
+
                   </section>
                 )}
             </div>
@@ -46,3 +81,14 @@ const POST_QUERY = gql`
   isEditMode @client
 }
  `
+//query to be used on our checkbox input
+const UPDATE_POST = gql`
+  mutation updatePost($check: Boolean, $id: ID!) {
+    updatePost( where: {id: $id}, data: { check: $check}) {
+      title
+      body
+      id
+      check
+    }
+  }
+`

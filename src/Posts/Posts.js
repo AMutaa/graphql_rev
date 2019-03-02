@@ -53,6 +53,7 @@ const POSTS_QUERY = gql`
     id
     title
     body
+    check
  }
 }
  `
