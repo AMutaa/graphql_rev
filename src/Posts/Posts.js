@@ -24,7 +24,13 @@ export default class Posts extends Component {
                       </Link>
                     </li>
                   ))}
-                  <li><button className='button' onClick={fetchMore}>Load More</button></li>
+                  <li><button className='button' onClick={() => fetchMore({
+                    variables: { skip: posts.length },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev;
+                      return Object.assign({}, prev, { posts: [...prev.posts, ...fetchMoreResult.posts] })
+                    }
+                  })}>Load More</button></li>
                 </Fragment>
               )
 
@@ -42,11 +48,14 @@ export default class Posts extends Component {
 // writing the first query
 // adjusted query with sorting and pagination
 const POSTS_QUERY = gql`
- query allPosts{
-  posts(orderBy: createdAt_DESC, first: 3)  {
+ query allPosts($skip: Int){
+  posts(orderBy: createdAt_DESC, first: 3, skip: $skip)  {
     id
     title
     body
  }
 }
  `
+
+
+//  built fetchMore function for pagination(in Apollo) and called onClick on Load More button
