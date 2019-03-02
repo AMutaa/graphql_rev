@@ -1,26 +1,10 @@
 import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Post from './Posts/Post';
 import Posts from './Posts/Posts';
 import NewPost from './Posts/NewPost';
 import './App.css';
 
-// Local State with Apollo Link State
-
-const defaultState = {
-  isEditMode: false
-}
-
-// setting up client, connecting our site to GraphQL API
-const client = new ApolloClient({
-  uri: 'https://api-useast.graphcms.com/v1/cjs43zffl1ixr01gfikmzpp5v/master',
-  clientState: {
-    defaults: defaultState,
-    resolvers: {}
-  }
-})
 
 
 // testing if our client is connected by runnu=ing query out of react
@@ -35,25 +19,23 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      // use ApolloProvider to connected to the client
-      <ApolloProvider client={client}>
-        <Router>
-          <div className="App">
-            <header>
-              <Link to={'/'}>
-                <h1 className='header'>THIS IS GRAPHQL</h1>
-              </Link>
-            </header>
-            <main>
-              <Switch>
-                <Route exact path='/' component={Posts} />
-                <Route exact path='/post/new' component={NewPost} />
-                <Route path='/post/:id' component={Post} />
-              </Switch>
-            </main>
-          </div>
-        </Router>
-      </ApolloProvider>
+      <Router>
+        <div className="App">
+          <header>
+            <Link to={'/'}>
+              <h1 className='header'>THIS IS GRAPHQL</h1>
+            </Link>
+          </header>
+          <main>
+            <Switch>
+              <Route exact path='/' component={Posts} />
+              <Route exact path='/post/new' component={NewPost} />
+              <Route path='/post/:id' component={Post} />
+            </Switch>
+          </main>
+        </div>
+      </Router>
+
     );
   }
 }
