@@ -14,7 +14,7 @@ export default class PostForm extends Component {
     post: PropTypes.object
   }
 
-  static propTypes = {
+  static defaultProps = {
     post: {},
     onSuccess: () => null
 
